@@ -12,7 +12,7 @@
 
 assign_clust <- function(clustered){
   asigned_clusters <- as.data.frame(NULL)
-  for (i in 1:length(clustered)) {
+  for (i in 1:length(clustered[[1]])) {
     asigned_clusters <- rbind(asigned_clusters, as.data.frame(clustered[[1]][[i]]))
   }
   asigned_clusters$id <- paste(asigned_clusters$round, asigned_clusters$medianx, asigned_clusters$mediany, sep = "_")
@@ -26,9 +26,9 @@ assign_clust <- function(clustered){
       round(sum(asigned_clusters[asigned_clusters$id == i, ]$weight) / 
               nrow(asigned_clusters[asigned_clusters$id == i, ]), 2)
     asigned_clusters[asigned_clusters$id == i, ]$p_dist <-
-      mean(asigned_clusters[asigned_clusters$id == i, ]$dist)
+      round(mean(asigned_clusters[asigned_clusters$id == i, ]$dist), 2)
   }
   list(centers_clusters = subset(asigned_clusters, duplicated(asigned_clusters$id) == F,
-                                 select = c(id, x, y, weight, medianx, mediany, p_dist, cubre, round)), 
+                                 select = c(id, x, y, p_weight, medianx, mediany, p_dist, cubre, round)), 
        assigned_clusters = subset(asigned_clusters, select = c(id, x, y, weight, medianx, mediany, dist, round)))
 }
