@@ -22,21 +22,23 @@
 #' \item{matriz}{The distance matrix of all the rows of the dataframe}
 #' @export
 #' @import osrm
+#' @import rgdal
 #' @importFrom curl has_internet
 #' @importFrom assertthat assert_that 
 #' @references Timothée Giraud, Robin Cura and Matthieu Viry 2017 osrm: Interface 
 #' Between R and the OpenStreetMap-Based Routing Service OSRM. https://CRAN.R-project.org/package=osrm
 #' @keywords spatial osrm
 #' @examples 
-#' \dontrun{
+#' \donttest{
 #' a <- osrm_matrixby100(src = cbind(id = 1:80, pop_epp[1:80, 1:2]),
 #'                       dst = cbind(id = 103:135, pop_epp[103:135, 1:2]), 
 #'                       crs = sp::CRS("+init=epsg:32721"), wid = TRUE)
 #' }
 
 osrm_matrixby100 <- function(src, dst, crs, wid = TRUE){
-  assertthat::assert_that(.x = curl::has_internet() & getOption("osrm.server") == "https://routing.openstreetmap.de/", 
-                          msg = "No internet access was detected. Please check your connection.")
+  EPP::osrm_ok()
+  rgdal::set_thin_PROJ6_warnings(TRUE)
+  getOption("osrm.server") == "https://routing.openstreetmap.de/"
   src_s <- SpatialPoints(if (wid == TRUE) {as.data.frame(src[, 2:3])} else {as.data.frame(src[, 1:2])}, proj4string = crs)
   dst_s <- SpatialPoints(if (wid == TRUE) {as.data.frame(dst[, 2:3])} else {as.data.frame(dst[, 1:2])}, proj4string = crs)
   src_s <- spTransform(src_s, CRS("+init=epsg:4326"))

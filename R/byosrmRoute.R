@@ -21,16 +21,15 @@
 #' Between R and the OpenStreetMap-Based Routing Service OSRM. 
 #' https://CRAN.R-project.org/package=osrm
 #' @examples 
-#' \dontrun{
+#' \donttest{
 #' src_dst <- as.data.frame(cbind(576626, 6143649, 562248, 6142596))
 #' a <- byosrmRoute(src_dst, crs = sp::CRS("+init=epsg:32721"))
 #' }
 
 
 byosrmRoute <- function(src_dst, crs){
-        assertthat::assert_that(.x = curl::has_internet() && 
-                                        getOption("osrm.server") == "https://routing.openstreetmap.de/", 
-                                msg = "No internet access was detected. Please check your connection.")
+        EPP::osrm_ok()
+        getOption("osrm.server") == "https://routing.openstreetmap.de/"
         pop_s <- SpatialPoints(src_dst[ ,1:2], proj4string = crs)## transform pop to spatial object
         centers_s <- SpatialPoints(src_dst[ ,3:4], proj4string = crs)## transform centers to spatial object
         pop_s <- spTransform(pop_s, sp::CRS("+init=epsg:4326"))
