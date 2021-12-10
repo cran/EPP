@@ -2,6 +2,10 @@
 
 -------------------------------------------------------
 
+## EPP v0.3.5 (2021-12-10)
+
+  * Delete 'as.vector()' in three functions to stop failling in latest  R-devel
+
 ## EPP v0.3.4 (2021-11-04)
 
   * added a osrm_ok function to fail gratefully if osrm server is down
