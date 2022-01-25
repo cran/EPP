@@ -13,11 +13,12 @@
 #' \item{dist}{distance by route to nearest neighbor in kilometers}
 #' @export
 #' @import sf
+#' @import osrm
 #' @importFrom dplyr '%>%'
 #' @importFrom nngeo st_nn
-#' @importFrom osrm osrmTable osrmRoute
 #' @importFrom curl has_internet
-#' @importFrom assertthat assert_that 
+#' @importFrom assertthat assert_that
+#' @importFrom methods is
 #' @examples
 #' \donttest{
 #' pop_epp_nn <- assign_nn(x = pop_epp[1:20,], y = centers_epp)
@@ -26,23 +27,25 @@
 assign_nn <- function(x, y, y.id = "id", k = 10, crs = 32721){
         assertthat::assert_that(.x = curl::has_internet() & getOption("osrm.server") == "https://routing.openstreetmap.de/", 
                                 msg = "No internet access was detected. Please check your connection.")
-        if(!"sf" %in% class(x)){
+        if(!is(x, "sf")){
                 x <- sf::st_as_sf(x, coords = c("x", "y"), remove = FALSE) %>% st_set_crs(crs)
         }
-        if(!"sf" %in% class(y)){
+        if(!is(y, "sf")){
                 y <- sf::st_as_sf(y, coords = c("x", "y"), remove = FALSE) %>% st_set_crs(crs)
         }
+        
         if(!y.id %in% names(y)) stop(paste(y.id, "is not a variable name of second object"))
         nn <- nngeo::st_nn(x, y, k = k, progress = FALSE)
-        for (i in 1:length(nn)) {
+        for (i in 1:length(nn)){
                 vec <- osrmTable(src = x[i, ], dst = y[nn[[i]], ])[["durations"]]
                 y_nn <- as.numeric(colnames(vec)[which.min(vec)])
                 x[i, "nn_id"] <- y[y_nn, y.id] %>% 
                         sf::st_drop_geometry()
                 x[i, "time"] <- vec[, which.min(vec)] 
-                x[i, "dist"] <- osrm::osrmRoute(src = x[i,] %>% st_transform(4326),
-                                                dst = y[y_nn, ] %>% st_transform(4326),
-                                                overview = FALSE)[[2]]
+                ruta <- osrm::osrmRoute(src = x[i,] %>% st_transform(4326),
+                                        dst = y[y_nn, ] %>% st_transform(4326),
+                                        overview = FALSE)
+                x[i, "dist"] <- ruta[[2]]
         }
         return(x)
 }

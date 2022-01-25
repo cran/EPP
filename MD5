@@ -1,8 +1,8 @@
-3b561a016ee085cf42b2bc000d0b8685 *DESCRIPTION
-ab0d8b5b62f042b5dfa8b03e4f13a680 *NAMESPACE
-d53a78f2cec0d9ca542f90aeaf06a2e0 *NEWS.md
+5106b26c51441c1e0dd883776050293c *DESCRIPTION
+c70ea1b3ad251406d22d7fb187512dda *NAMESPACE
+9ceff975b2c13069d87d31d4063038d6 *NEWS.md
 0cbb4589c9150c26b6ec2654c2f6fae6 *R/assign_clust.R
-157d67a98cefa935d7e553358ca8cef4 *R/assign_nn.R
+ab7332552ad60e21f1dafe78d1c2d44b *R/assign_nn.R
 06447f07947bf705b0c2e9dd67455f3b *R/assign_voro.R
 541bae2bd0ee6ee6c7e2549bdf95844f *R/assignation_exist.R
 cea6cf1cd57e4bafd92fecdbb30ec907 *R/buff_voronoi.R
@@ -39,7 +39,7 @@ a1c6187012acbda4ed1697a93cc5326a *man/assign_nn.Rd
 a798faffbafadf9acebf31530521b178 *man/buff_voronoi.Rd
 c6d28b839a048b5b0cc365f096df6ecf *man/byosrmRoute.Rd
 84f0fb6ffb51a85e2947bf69c238e6f2 *man/centers.Rd
-aa83a51697c12a606569ebcc7bc0d02e *man/centers_epp.Rd
+7801214133c5e2969fe02f1f2ac5df15 *man/centers_epp.Rd
 357fefcf0ff67dfed80ccf65e406b04b *man/clust_it.Rd
 dd1ba4ddde3c48542baff04c2a21caa4 *man/clust_pop.Rd
 76509fe32dcabcc1fb3bfbd4c9a44510 *man/epp.Rd
@@ -59,11 +59,11 @@ d9dca0d8dac6f42ddf91df57c60dd88d *man/labels_es.Rd
 47f53a1d7008621d9309a1cdd7513491 *man/osrm_matrixby100.Rd
 0a79c2a0573d1e1e68988467370329dd *man/osrm_ok.Rd
 ed20ed6a74aad3e67a238f8227c48dbc *man/pop.Rd
-024b77ce3ad21697936b67db547ca48b *man/pop_epp.Rd
+63d717c262c623886337053732bda671 *man/pop_epp.Rd
 f20674afdac28312ed3792dd4e6a5fc1 *man/voro_polygon.Rd
 09f14c66e796b5fd73dde95c6971741c *tests/testthat.R
 e24e7c7dc77d212c6884301dada3f0b0 *tests/testthat/test-assign_clust.R
-ba20a19902d9cd3e001e079179a5fe81 *tests/testthat/test-assign_nn.R
+f06cd03d037d89f9dfcc0a3657d84de8 *tests/testthat/test-assign_nn.R
 36ee61d985680deaca00501b00d9136b *tests/testthat/test-assign_voro.R
 bf334e4adec1a6b33b1269d26691e5c5 *tests/testthat/test-assignation_exist.R
 d073ba0ab676342939a4399702b5eb30 *tests/testthat/test-buff_voronoi.R
